@@ -16,7 +16,7 @@ IF USING ps-dispatch THEN GO INTO THE client/main.lua and go to policeAlert() an
 ----------------------------------------------------------------------------------
 PASTE THIS INTO ps-dispatch/client/cl_extraalerts.lua
 
-```local function ParkingMeterRobbery()
+`local function ParkingMeterRobbery()
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
     local gender = GetPedGender()
