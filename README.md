@@ -23,7 +23,8 @@ PASTE THIS INTO ps-dispatch/server/sv_dispatchcodes.lua
 
 PASTE THIS INTO ps-dispatch/client/cl_extraalerts.lua
 
-```local function ParkingMeterRobbery()
+```
+local function ParkingMeterRobbery()
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
     local gender = GetPedGender()
@@ -46,4 +47,4 @@ PASTE THIS INTO ps-dispatch/client/cl_extraalerts.lua
         job = {"police"} -- jobs that will get the alerts
     })
 end exports('ParkingMeterRobbery', ParkingMeterRobbery)
------------------------------------------------------------------------------------
+
