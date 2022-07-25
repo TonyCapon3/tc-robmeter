@@ -11,7 +11,7 @@ RegisterNetEvent('tc-pmeter-payout', function()
     end
     
     if Config.BlackMoney then
-        local amount = math.random(1,5)
+        local amount = math.random(Config.MinMarkedBills,Config.MaxMarkedBills)
         local src = source
         local Player = QBCore.Functions.GetPlayer(src)
         Player.Functions.AddItem('markedbills', amount)
