@@ -9,6 +9,8 @@ https://github.com/qbcore-framework/qb-core
 
 https://github.com/qbcore-framework/qb-target
 
+https://github.com/Nathan-FiveM/qb-lock
+
 DRAG coins.ogg FILE INTO [standalone]/interact-sound/html/sounds
 
 # OPTIONAL
