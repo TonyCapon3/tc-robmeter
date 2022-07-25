@@ -14,9 +14,14 @@ DRAG coins.ogg FILE INTO [standalone]/interact-sound/html/sounds
 # OPTIONAL
 IF USING ps-dispatch THEN GO INTO THE client/main.lua and go to policeAlert() and uncomment the export
 ----------------------------------------------------------------------------------
+PASTE THIS INTO ps-dispatch/server/sv_dispatchcodes.lua
+
+`["parkingmeterrobbery"] =  {displayCode = '10-90', description = "Parking Meter(s) Being Robbed", radius = 0, recipientList = {'police'}, blipSprite = 267, blipColour = 4, blipScale = 1.5, blipLength = 2, sound = "robberysound", offset = "false"},`
+
+
 PASTE THIS INTO ps-dispatch/client/cl_extraalerts.lua
 
-``local function ParkingMeterRobbery()
+`local function ParkingMeterRobbery()
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
     local gender = GetPedGender()
@@ -40,6 +45,3 @@ PASTE THIS INTO ps-dispatch/client/cl_extraalerts.lua
     })
 end exports('ParkingMeterRobbery', ParkingMeterRobbery)
 -----------------------------------------------------------------------------------
-PASTE THIS INTO ps-dispatch/server/sv_dispatchcodes.lua
-
-`["parkingmeterrobbery"] =  {displayCode = '10-90', description = "Parking Meter(s) Being Robbed", radius = 0, recipientList = {'police'}, blipSprite = 267, blipColour = 4, blipScale = 1.5, blipLength = 2, sound = "robberysound", offset = "false"},`
