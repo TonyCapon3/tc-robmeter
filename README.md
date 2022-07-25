@@ -38,7 +38,7 @@ PASTE THIS INTO ps-dispatch/client/cl_extraalerts.lua
         dispatchMessage = 'Parking Meter Robbery', -- message
         job = {"police"} -- jobs that will get the alerts
     })
-end exports('ParkingMeterRobbery', ParkingMeterRobbery)```
+end exports('ParkingMeterRobbery', ParkingMeterRobbery)
 -----------------------------------------------------------------------------------
 PASTE THIS INTO ps-dispatch/server/sv_dispatchcodes.lua
 
