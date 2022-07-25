@@ -52,7 +52,7 @@ RegisterNetEvent('tc-pmeter-rob', function()
 end)
 
 function policeAlert()
-    TriggerServerEvent("police:server:policeAlert", 'Parking Meter Robbery') --configure to your liking this is jus default
+    TriggerServerEvent("police:server:policeAlert", 'Parking Meter Robbery') --configure to your liking this is just default
     -- exports['ps-dispatch']:ParkingMeterRobbery() -- or use ps-dispatch alert
 end
 
