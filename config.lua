@@ -13,9 +13,11 @@ Config.Cash = true
                             --use either cash or markedbills if u want cash then set true vice versa
 Config.BlackMoney = false
 
-Config.MinCash = 500
+Config.MinCash = 500 --if Config.Cash = true
 Config.MaxCash = 2000
 
+Config.MinMarkedBills = 1 --if Config.BlackMoney = true
+Config.MaxMarkedBills = 5
 
 
 Config.Models = {
