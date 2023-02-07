@@ -1,6 +1,12 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 
+RegisterNetEvent('tc-pmeter:server:final', function(item, amt)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    Player.Functions.RemoveItem(item, amt)
+end)
+
 RegisterNetEvent('tc-pmeter-payout', function()
     if Config.Cash then
         local amount = math.random(Config.MinCash,Config.MaxCash)
