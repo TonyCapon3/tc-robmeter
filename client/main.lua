@@ -1,12 +1,25 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local function policeAlert()
+    TriggerServerEvent("police:server:policeAlert", 'Parking Meter Robbery') --configure to your liking this is jus default
+    -- exports['ps-dispatch']:ParkingMeterRobbery() -- or use ps-dispatch alert
+end
+
+local function delPmeter()
+    local ply = PlayerPedId()
+    local plyCoords = GetEntityCoords(ply, 0)
+    for k, v in pairs(Config.ModelHashes) do
+        local closestPark = GetClosestObjectOfType(plyCoords.x, plyCoords.y, plyCoords.z, 1.5, v, false, 0, 0)
+        SetEntityAsMissionEntity(closestPark, true, true)
+        DeleteEntity(closestPark)
+    end    
+end
 
 
 
-RegisterNetEvent('tc-pmeter-rob', function()
+local function main()
     local ped = PlayerPedId()
-    QBCore.Functions.TriggerCallback('QBCore:HasItem', function(hasItem)
-        if hasItem then
+        if QBCore.Functions.HasItem('lockpick') then
             local time = math.random(7,10)
             local circles = math.random(2,4)
             local success = exports['qb-lock']:StartLockPickCircle(circles, time, success)
@@ -23,7 +36,7 @@ RegisterNetEvent('tc-pmeter-rob', function()
             }, {}, {}, function() 
                 TriggerServerEvent('tc-pmeter-payout')
                 ClearPedTasks(ped)
-                TriggerServerEvent("QBCore:Server:RemoveItem", "lockpick", 1)
+                TriggerServerEvent("tc-pmeter:server:final", "lockpick", 1)
                 TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["lockpick"], "remove")
                 policeAlert()
                 delPmeter()
@@ -41,38 +54,24 @@ RegisterNetEvent('tc-pmeter-rob', function()
             end)
         else
             QBCore.Functions.Notify('Lockpick Bent Out Of Shape', 'error', 7500)
-            TriggerServerEvent("QBCore:Server:RemoveItem", "lockpick", 1)
+            TriggerServerEvent("tc-pmeter:server:final", "lockpick", 1)
             TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items["lockpick"], "remove")
             policeAlert()
         end
         else
             QBCore.Functions.Notify('You Need A lockpick', 'error', 7500)
         end
-    end, 'lockpick')
-end)
-
-function policeAlert()
-    TriggerServerEvent("police:server:policeAlert", 'Parking Meter Robbery') --configure to your liking this is jus default
-    -- exports['ps-dispatch']:ParkingMeterRobbery() -- or use ps-dispatch alert
 end
 
-function delPmeter()
-    local ply = PlayerPedId()
-    local plyCoords = GetEntityCoords(ply, 0)
-    for k, v in pairs(Config.ModelHashes) do
-        local closestPark = GetClosestObjectOfType(plyCoords.x, plyCoords.y, plyCoords.z, 1.5, v, false, 0, 0)
-        SetEntityAsMissionEntity(closestPark, true, true)
-        DeleteEntity(closestPark)
-    end    
-end
 
 
 CreateThread(function()
     exports['qb-target']:AddTargetModel(Config.Models, {
         options = {
             { 
-                type = "client",
-                event = "tc-pmeter-rob",
+                action = function()
+                    main()
+                end,
                 icon = "fas fa-screwdriver",
                 label = "Rob Parking Meter",
             },
