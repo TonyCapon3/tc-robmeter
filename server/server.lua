@@ -20,7 +20,11 @@ RegisterNetEvent('tc-pmeter-payout', function()
         local amount = math.random(Config.MinMarkedBills,Config.MaxMarkedBills)
         local src = source
         local Player = QBCore.Functions.GetPlayer(src)
-        Player.Functions.AddItem('markedbills', amount)
+        local info = {
+            worth = math.random(Config.MarkedBillWorthMin,Config.MarkedBillWorthMax)
+        }
+        Player.Functions.AddItem('markedbills', amount, false, info)
+        --Player.Functions.AddItem('markedbills', amount, false, info)
         TriggerClientEvent('QBCore:Notify', src, 'You got '..amount..' marked bills!', 'success') 
     end
 
